@@ -25,7 +25,7 @@ SECRET_KEY = 'x@-^ug#ce4+%0ne#b)xbfxeq1uj4uzp09*ep7e_wus!221q83f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['qianstudy.cn']
 
 
 # Application definition
