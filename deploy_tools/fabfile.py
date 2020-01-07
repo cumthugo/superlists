@@ -35,7 +35,7 @@ def _update_settings(source_folder, site_name):
     sed(setting_path, 'ALLOWED_HOSTS = .+$',
             f'ALLOWED_HOSTS = ["{site_name}"]')
     secret_key_file = source_folder + '/superlists/secret_key.py'
-    if not exist(secret_key_file):
+    if not exists(secret_key_file):
         chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
         append(secret_key_file, f'SECRET_KEY = "{key}"')
@@ -43,7 +43,7 @@ def _update_settings(source_folder, site_name):
 
 def _update_virtualenv(source_folder):
     virtualenv_folder = source_folder + '/../virtualenv'
-    if not exist(virtualenv_folder + '/bin/pip'):
+    if not exists(virtualenv_folder + '/bin/pip'):
         run(f'python3.6 -m venv {virtualenv_folder}')
     run(f'{virtualenv_folder}/bin/pip install -r {source_folder}/requirements.txt')
 
