@@ -1,5 +1,5 @@
 from fabric.contrib.files import append, exists, sed
-from fabric.api import env, local, run
+from fabric.api import env, local, run, sudo
 
 import random
 
@@ -15,6 +15,7 @@ def deploy():
     _update_virtualenv(source_folder)
     _update_static_files(source_folder)
     _update_database(source_folder)
+    _restart_nginx(env.host)
 
 def _create_directory_structure_if_necessary(site_folder):
     for subfolder in ('database', 'static', 'virtualenv', 'source'):
@@ -58,3 +59,7 @@ def _update_database(source_folder):
             f'cd {source_folder}'
             ' && ../virtualenv/bin/python manage.py migrate --noinput'
         )
+
+def _restart_nginx(site_name):
+    sudo( f'systemctl daemon-reload')
+    sudo( f'sudo systemctl restart {site_name}')
