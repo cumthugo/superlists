@@ -5,6 +5,8 @@ from django.utils.html import escape
 
 from lists.views import home_page
 from lists.models import Item,List
+from unittest import skip
+from lists.forms import ItemForm
 
 # Create your tests here.
 class HomePageTest(TestCase):
@@ -17,6 +19,10 @@ class HomePageTest(TestCase):
     def test_uses_home_template(self):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
 
 class NewListTest(TestCase):
     def test_can_save_a_POST_request(self):
@@ -109,3 +115,16 @@ class ListViewTest(TestCase):
         self.assertContains(response, expected_error)
         self.assertEqual(Item.objects.count(),0)
 
+    @skip
+    def test_duplicate_item_validation_errors_end_up_on_lists_page(self):
+        list1 = List.objects.create()
+        item1 = Item.objects.create(list=list1, text='textey')
+        response = self.client.post(
+                f'/lists/{list1.id}/',
+                data={'item_text':'textey'}
+        )
+
+        expected_error = escape("You've already got this in your list")
+        self.assertContains(response, expected_error)
+        self.assertTemplateUsed(response, 'list.html')
+        self.assertEqual(Item.objects.all().count(),1)
