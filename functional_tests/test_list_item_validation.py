@@ -25,7 +25,7 @@ class ItemValidationTest(FunctionalTest):
             '#id_text:invalid'
             ))
 
-        time.sleep(0.3)
+        time.sleep(0.2)
         self.get_item_input_box().send_keys('Make tea')
         self.get_item_input_box().send_keys(Keys.ENTER)
 

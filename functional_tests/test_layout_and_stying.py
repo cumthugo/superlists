@@ -7,7 +7,7 @@ class LayoutAndStyingTest(FunctionalTest):
     def test_layout_and_styling(self):
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024,768)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
 
         inputbox = self.get_item_input_box()
