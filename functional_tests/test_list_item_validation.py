@@ -3,6 +3,7 @@ from unittest import skip
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from .base import FunctionalTest
+import time
 
 class ItemValidationTest(FunctionalTest):
     def test_cannot_add_empty_list_items(self):
@@ -24,6 +25,7 @@ class ItemValidationTest(FunctionalTest):
             '#id_text:invalid'
             ))
 
+        time.sleep(0.3)
         self.get_item_input_box().send_keys('Make tea')
         self.get_item_input_box().send_keys(Keys.ENTER)
 
