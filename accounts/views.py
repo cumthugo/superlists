@@ -24,12 +24,7 @@ def send_login_email(request):
     return redirect('/')
 
 def login(request):
-    print('login called',file=sys.stderr)
-    print(f'token is {request.GET.get("token")}',file=sys.stderr)
     user = auth.authenticate(uid=request.GET.get('token'))
     if user is not None:
-        print('login success',file=sys.stderr)
         auth.login(request, user)
-    else:
-        print('login failed',file=sys.stderr)
     return redirect('/')

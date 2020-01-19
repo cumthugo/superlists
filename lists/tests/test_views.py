@@ -111,7 +111,7 @@ class ListViewTest(TestCase):
     def test_passes_correct_list_to_template(self):
         other_list = List.objects.create()
         correct_list = List.objects.create()
-        response = self.client.get('f/lists/{correct_list.id}/')
+        response = self.client.get(f'/lists/{correct_list.id}/')
         #we can't test this line below, it only was used in django 1.1
         #self.assertEqual(response.context['list'], correct_list)
 
