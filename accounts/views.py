@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib import auth, messages
 from accounts.models import Token
+from django.contrib.auth import logout as sys_logout
 import sys
 
 def send_login_email(request):
@@ -27,4 +28,8 @@ def login(request):
     user = auth.authenticate(uid=request.GET.get('token'))
     if user is not None:
         auth.login(request, user)
+    return redirect('/')
+
+def logout(request):
+    sys_logout(request)
     return redirect('/')
