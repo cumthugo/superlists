@@ -144,5 +144,11 @@ LOGGING = {
     'root' : {'level' : 'INFO'},
 }
 
+#EMAIL_HOST = 'smtp.163.com'
+#EMAIL_PORT = 465
+#EMAIL_HOST_USER = 'cumt_zhangyong@163.com'
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+#EMAIL_USE_SSL = True
+
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
